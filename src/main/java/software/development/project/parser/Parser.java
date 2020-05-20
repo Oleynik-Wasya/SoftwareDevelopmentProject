@@ -1,5 +1,6 @@
 package software.development.project.parser;
 
+import software.development.project.models.Legend;
 import software.development.project.models.Module;
 import software.development.project.models.Subject;
 import software.development.project.sheet.SheetApi;
@@ -7,7 +8,7 @@ import software.development.project.sheet.SheetApiImpl;
 
 import java.util.*;
 
-public class Parser {
+public class Parser implements Parse {
     public Subject parseFromCsvToSubject(String fileLocation) {
         SheetApi sheetApi = new SheetApiImpl(fileLocation);
         Map<Integer, List<String>> data = sheetApi.read();
@@ -20,7 +21,7 @@ public class Parser {
         List<Module> modules = getModules(data);
         Set<String> subjects = getUniqueSubjects(data);
 
-        return new Subject(name, semester, language, degree, modules, subjects);
+        return new Subject(name, semester, language, degree, modules, subjects, new Legend(subjects));
     }
 
     private List<Module> getModules(Map<Integer, List<String>> data) {
@@ -29,7 +30,7 @@ public class Parser {
 
         for (int i = 2; data.containsKey(i); i++) {
             List<String> row = data.get(i);
-            modules.add(new Module(row.get(0), Integer.valueOf(row.get(1)), row.get(2), row.get(3)));
+            modules.add(new Module(row.get(0), Integer.valueOf(row.get(1)), Integer.valueOf(row.get(2)), row.get(3)));
         }
 
         return modules;

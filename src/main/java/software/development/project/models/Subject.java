@@ -1,9 +1,10 @@
 package software.development.project.models;
 
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class Subject {
+
     private String name;
 
     public String getName() {
@@ -18,7 +19,7 @@ public class Subject {
     private String language;
     private String Degree;
     private List<Module> modules;
-    private Set<String> subjects;
+    private Legend legend;
 
     public String getSemester() {
         return semester;
@@ -52,21 +53,21 @@ public class Subject {
         this.modules = modules;
     }
 
-    public Set<String> getSubjects() {
-        return subjects;
+    public Legend getLegend() {
+        return legend;
     }
 
-    public void setSubjects(Set<String> subjects) {
-        this.subjects = subjects;
+    public void setLegend(Legend legend) {
+        this.legend = legend;
     }
 
-    public Subject(String name, String semester, String language, String degree, List<Module> modules, Set<String> subjects) {
+    public Subject(String name, String semester, String language, String degree, List<Module> modules, Set<String> subjects, Legend legend) {
         this.name = name;
         this.semester = semester;
         this.language = language;
         Degree = degree;
         this.modules = modules;
-        this.subjects = subjects;
+        this.legend = legend;
     }
 
     @Override
@@ -77,7 +78,18 @@ public class Subject {
                 ",\n language='" + language + '\'' +
                 ",\n Degree='" + Degree + '\'' +
                 ",\n modules=" + modules +
-                ",\n subjects=" + subjects +
+                ",\n subjects=" + legend +
                 '}';
+    }
+
+    public List<Module> getModulesWithSameSemester(Integer semester) {
+        List<Module> modules = new ArrayList<>();
+        for (Module module : this.modules) {
+            if (module.getSemester().equals(semester)) {
+                modules.add(module);
+            }
+        }
+
+        return modules;
     }
 }

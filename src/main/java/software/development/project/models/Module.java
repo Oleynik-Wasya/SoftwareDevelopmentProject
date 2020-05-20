@@ -3,7 +3,7 @@ package software.development.project.models;
 public class Module {
     private String name;
     private Integer credits;
-    private String semester;
+    private Integer semester;
     private String science;
 
     public String getName() {
@@ -22,11 +22,11 @@ public class Module {
         this.credits = credits;
     }
 
-    public String getSemester() {
+    public Integer getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
@@ -38,7 +38,7 @@ public class Module {
         this.science = science;
     }
 
-    public Module(String name, Integer credits, String semester, String science) {
+    public Module(String name, Integer credits, Integer semester, String science) {
         this.name = name;
         this.credits = credits;
         this.semester = semester;
