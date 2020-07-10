@@ -1,10 +1,23 @@
 package software.development.project.models;
 
+import java.awt.*;
+
 public class Module {
     private String name;
     private Integer credits;
     private Integer semester;
     private String science;
+    private Color color;
+
+    public Color getColor()
+    {
+        return color;
+    }
+
+    public void setColor(Color color)
+    {
+        this.color = color;
+    }
 
     public String getName() {
         return name;

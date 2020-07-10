@@ -21,7 +21,14 @@ public class Parser implements Parse {
         List<Module> modules = getModules(data);
         Set<String> subjects = getUniqueSubjects(data);
 
-        return new Subject(name, semester, language, degree, modules, subjects, new Legend(subjects));
+        Legend legend = new Legend(subjects);
+
+        for (Module module : modules)
+        {
+            module.setColor(legend.getColor(module.getScience()));
+        }
+
+        return new Subject(name, semester, language, degree, modules, subjects, legend);
     }
 
     private List<Module> getModules(Map<Integer, List<String>> data) {

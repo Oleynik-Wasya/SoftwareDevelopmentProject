@@ -3,93 +3,117 @@ package software.development.project.models;
 import java.util.*;
 import java.util.List;
 
-public class Subject {
+public class Subject
+{
 
-    private String name;
+	private String name;
 
-    public String getName() {
-        return name;
-    }
+	public String getName()
+	{
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
-    private String semester;
-    private String language;
-    private String Degree;
-    private List<Module> modules;
-    private Legend legend;
+	private String semester;
+	private String language;
+	private String Degree;
+	private List<Module> modules;
+	private Legend legend;
 
-    public String getSemester() {
-        return semester;
-    }
+	public String getSemester()
+	{
+		return semester;
+	}
 
-    public void setSemester(String semester) {
-        this.semester = semester;
-    }
+	public void setSemester(String semester)
+	{
+		this.semester = semester;
+	}
 
-    public String getLanguage() {
-        return language;
-    }
+	public String getLanguage()
+	{
+		return language;
+	}
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+	public void setLanguage(String language)
+	{
+		this.language = language;
+	}
 
-    public String getDegree() {
-        return Degree;
-    }
+	public String getDegree()
+	{
+		return Degree;
+	}
 
-    public void setDegree(String degree) {
-        Degree = degree;
-    }
+	public void setDegree(String degree)
+	{
+		Degree = degree;
+	}
 
-    public List<Module> getModules() {
-        return modules;
-    }
+	public List<Module> getModules()
+	{
+		return modules;
+	}
 
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
-    }
+	public void setModules(List<Module> modules)
+	{
 
-    public Legend getLegend() {
-        return legend;
-    }
+		this.modules = modules;
+	}
 
-    public void setLegend(Legend legend) {
-        this.legend = legend;
-    }
+	public Legend getLegend()
+	{
+		return legend;
+	}
 
-    public Subject(String name, String semester, String language, String degree, List<Module> modules, Set<String> subjects, Legend legend) {
-        this.name = name;
-        this.semester = semester;
-        this.language = language;
-        Degree = degree;
-        this.modules = modules;
-        this.legend = legend;
-    }
+	public void setLegend(Legend legend)
+	{
+		this.legend = legend;
+	}
 
-    @Override
-    public String toString() {
-        return "Subject{" +
-                "name='" + name + '\'' +
-                ",\n semester='" + semester + '\'' +
-                ",\n language='" + language + '\'' +
-                ",\n Degree='" + Degree + '\'' +
-                ",\n modules=" + modules +
-                ",\n subjects=" + legend +
-                '}';
-    }
+	public Subject(String name, String semester, String language, String degree, List<Module> modules,
+		Set<String> subjects, Legend legend)
+	{
+		this.name = name;
+		this.semester = semester;
+		this.language = language;
+		Degree = degree;
+		this.modules = modules;
+		this.legend = legend;
+	}
 
-    public List<Module> getModulesWithSameSemester(Integer semester) {
-        List<Module> modules = new ArrayList<>();
-        for (Module module : this.modules) {
-            if (module.getSemester().equals(semester)) {
-                modules.add(module);
+	@Override public String toString()
+	{
+		return "Subject{" + "name='" + name + '\'' + ",\n semester='" + semester + '\'' + ",\n language='" + language
+			+ '\'' + ",\n Degree='" + Degree + '\'' + ",\n modules=" + modules + ",\n subjects=" + legend + '}';
+	}
+
+	public List<Module> getModulesWithSameSemester(Integer semester)
+	{
+		List<Module> modules = new ArrayList<>();
+		for (Module module : this.modules)
+		{
+			if (module.getSemester().equals(semester))
+			{
+				modules.add(module);
+			}
+		}
+        sortModulesByColor(modules);
+		return modules;
+	}
+
+	private void sortModulesByColor(List<Module> modules)
+	{
+	    Collections.sort(modules, new Comparator<Module>()
+        {
+            @Override public int compare(Module m1, Module m2)
+            {
+                return m1.getColor().getRGB() - m2.getColor().getRGB();
             }
-        }
-
-        return modules;
-    }
+        });
+	}
 }
