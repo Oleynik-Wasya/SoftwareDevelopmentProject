@@ -3,6 +3,7 @@ package software.development.project.models;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Legend
 {
@@ -36,7 +37,13 @@ public class Legend
 
 	public Map<String, Color> getSubjects()
 	{
-		return subjects;
+		return subjects.entrySet().stream().sorted(new Comparator<Map.Entry<String, Color>>()
+		{
+			@Override public int compare(Map.Entry<String, Color> stringColorEntry, Map.Entry<String, Color> t1)
+			{
+				return stringColorEntry.getValue().getRGB() - t1.getValue().getRGB();
+			}
+		}).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 	}
 
 	public void setSubjects(Map<String, Color> subjects)

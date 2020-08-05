@@ -11,7 +11,7 @@ import java.util.*;
 public class SheetApiImpl implements SheetApi {
 
     private FileReader fileReader;
-    ;
+
     private CSVReader csvReader;
 
     public SheetApiImpl(String fileLocation) {
